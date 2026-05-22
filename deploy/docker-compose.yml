@@ -1,0 +1,20 @@
+services:
+  cpa-pool-manager:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    container_name: cpa-pool-manager
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    ports:
+      - "18417:18417"
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - cpa-pool-manager-data:/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  cpa-pool-manager-data:
